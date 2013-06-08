@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<title>提示消息</title>
+		<meta charset="utf-8">
+		<style type="text/css">
+			body{
+				font:12px;
+				text-align:center;
+			}
+			#notice {
+				width:400px;
+				background:#fff;
+				border:1px solid #bbb;
+				margin:100px auto;
+				/*position:absolute;*/
+				/*left:30%;
+				top:40%;*/
+			}
+			#notice div{
+				background:#fff;
+				padding:50px 0 30px;
+				font-size:14px;
+				font-weight:bold;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="notice">
+			<div><{$mess}></div>
+			<{if $mark}>
+				<p>
+					OK
+				</p>
+			<{else}>
+				<p>
+					ERROR
+				</p>
+			<{/if}>
+			<p>
+			在( <span id="second" style="color:blue;font-weight:bold"><{$timeout}></span> )秒后自动跳转，或直接点击 <a href="javascript:<{$location}>">这里</a> 跳转<br>
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var second = document.getElementById("second");
+		var time = <{$timeout}>;
+		//alert(time);
+		var tmp = setInterval(function(){
+			time--;
+			second.innerHTML= time;
+			if(time<=0){
+				<{$location}>;
+			}
+		},1000);
+		/*function fun(){
+			time--;
+			second.innerHtml = time;
+			if(time=0){
+				<{$location}>
+				return;
+			}
+			alert(time);
+		}*/
+	</script>
+</html>
