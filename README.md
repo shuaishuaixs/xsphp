@@ -7,7 +7,7 @@
 <?php
     error_reporting(0);
     define('XSPHP','./xsphp');//定义入口文件
-    define('APP','index');//定义项目的应用名称
+    define('APP','Index');//定义项目的应用名称
     require XSPHP.'/xsphp.php';
 ?>
 ```
