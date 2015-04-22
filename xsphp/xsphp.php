@@ -11,23 +11,23 @@
 	define("APP_PATH",PROJECT_PATH.APP."/");	//用户项目应用路径
 	define("RUNTIME_PATH",PROJECT_PATH."runtime/");	//网站缓存文件路径
 
-	require XSPHP_PATH."bases/init.class.php";	//加载目录包含类
+	require_once XSPHP_PATH."bases/init.class.php";	//加载目录包含类
 	init::set_path();				//设置目录包含
 	Structure::create();				//创建应用目录及文件
 	Prourl::paresUrl();				//处理当前URL
 
 	function __autoload($className){		//自动加载类函数
 		if($className == "Smarty"){	
-			include "Smarty.class.php";	//如果是Smarty，加载Smarty类
+			include_once "Smarty.class.php";	//如果是Smarty，加载Smarty类
 		}else{
-			include strtolower($className).".class.php";	//加载其他类
+			include_once strtolower($className).".class.php";	//加载其他类
 		}			
 	}
 
 
 	$config = PROJECT_PATH."config/config.php";	//系统配置文件
 	if(file_exists($config)){
-		require $config;			//加载配置文件
+		require_once $config;			//加载配置文件
 	}
 
 
@@ -35,19 +35,13 @@
 		 if(defined("DEBUG") && DEBUG == 1){
 			 $GLOBALS["debug"] = 1;
 			 error_reporting(E_ALL ^ E_NOTICE);	//输出除提醒错误以外的所有错误报告
-			 include "debug.class.php";
+			 include_once "debug.class.php";
 			 Debug::start();
 			 //set_error_handler(array("Debug","Catcher"));
 		 }else{
 			 ini_set("display_errors","Off");	//屏蔽错误输出
 			 ini_set("log_errors","On");		//开启错误日志，将错误报告写入日志中
 			 ini_set("error_log",PROJECT_PATH.APP."/error_log.txt");	//指定错误日志文件
-			 /*$log_file = PROJECT_PATH.APP."/error_log.txt";
-			 if(file_exists($log_file)){
-			 	echo "YES";
-			 }else{
-			 	echo "NO";
-			 }*/
 		 }
 
 		 $functionfile = XSPHP_PATH."common/function.inc.php";
